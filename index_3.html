@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Перевірка таблиці множення (Варіант 6)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 400px;
+        }
+
+        #score-display {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .task-area {
+            font-size: 24px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        input[type="number"] {
+            font-size: 20px;
+            padding: 5px;
+            width: 80px;
+            text-align: center;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            transition: background 0.3s;
+        }
+
+        #check-btn {
+            background-color: #28a745; /* Зелений */
+        }
+        #check-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        #next-btn {
+            background-color: #007bff; /* Синій */
+        }
+
+        #result-message {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            min-height: 27px; /* Щоб сторінка не стрибала */
+        }
+
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="score-display">Загальний рахунок 0% (0 правильних відповідей з 0)</div>
+
+        <div class="task-area">
+            <span id="task-label">? × ? = </span>
+            <input type="number" id="answer-input" placeholder="...">
+        </div>
+
+        <div class="buttons">
+            <button id="check-btn" onclick="checkAnswer()">Перевірити</button>
+            <button id="next-btn" onclick="nextTask()">Наступне завдання</button>
+        </div>
+
+        <div id="result-message"></div>
+    </div>
+
+    <script>
+        // Змінні для збереження стану
+        let totalQuestions = 0;
+        let correctAnswers = 0;
+        let num1 = 0;
+        let num2 = 0;
+        let isAnswered = false;
+
+        // Елементи DOM
+        const scoreDisplay = document.getElementById('score-display');
+        const taskLabel = document.getElementById('task-label');
+        const answerInput = document.getElementById('answer-input');
+        const resultMessage = document.getElementById('result-message');
+        const checkBtn = document.getElementById('check-btn');
+
+        // Функція генерації нового завдання
+        function nextTask() {
+            // Генеруємо випадкові числа від 2 до 9
+            num1 = Math.floor(Math.random() * 8) + 2; 
+            num2 = Math.floor(Math.random() * 8) + 2;
+
+            // Оновлюємо текст завдання
+            taskLabel.textContent = `${num1} × ${num2} = `;
+            
+            // Очищуємо поле вводу та повідомлення
+            answerInput.value = '';
+            answerInput.disabled = false;
+            answerInput.focus();
+            resultMessage.textContent = '';
+            
+            // Активуємо кнопку перевірки
+            isAnswered = false;
+            checkBtn.disabled = false;
+        }
+
+        // Функція оновлення статистики
+        function updateScore() {
+            let percentage = 0;
+            if (totalQuestions > 0) {
+                percentage = Math.round((correctAnswers / totalQuestions) * 100);
+            }
+            scoreDisplay.textContent = `Загальний рахунок ${percentage}% (${correctAnswers} правильних відповідей з ${totalQuestions})`;
+        }
+
+        // Функція перевірки відповіді
+        function checkAnswer() {
+            if (isAnswered) return; // Захист від повторного натискання
+
+            const userAnswer = parseInt(answerInput.value);
+            const correctAnswer = num1 * num2;
+
+            // Перевірка на пусте поле
+            if (isNaN(userAnswer)) {
+                alert("Будь ласка, введіть число!");
+                return;
+            }
+
+            totalQuestions++;
+
+            if (userAnswer === correctAnswer) {
+                correctAnswers++;
+                resultMessage.textContent = "Правильно!";
+                resultMessage.className = "success";
+            } else {
+                resultMessage.textContent = `Помилка, правильна відповідь «${correctAnswer}»`;
+                resultMessage.className = "error";
+            }
+
+            // Оновлюємо рахунок і блокуємо поле до наступного завдання
+            updateScore();
+            isAnswered = true;
+            answerInput.disabled = true;
+            checkBtn.disabled = true;
+        }
+
+        // Додаємо можливість натискати Enter для перевірки
+        answerInput.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                checkAnswer();
+            }
+        });
+
+        // Запуск першого завдання при завантаженні
+        nextTask();
+    </script>
+
+</body>
+</html>
