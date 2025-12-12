@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Варіант 06 - Float</title>
+    <link rel="stylesheet" href="style_1.css">
+    <style>
+        .float-container {
+            width: 100%;
+        }
+        .float-col {
+            float: left;
+            width: 25%; /* 100% / 4 колонки = 25% */
+        }
+        .clear {
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-yellow header">
+        <div class="logo-box"></div>
+        <h2>Блок 1</h2>
+    </div>
+
+    <div class="float-container">
+        <div class="bg-blue column float-col">
+            <h2>2</h2>
+        </div>
+        <div class="bg-red column float-col">
+            <h2>3</h2>
+        </div>
+        <div class="bg-white column float-col">
+            <h2>4</h2>
+        </div>
+        <div class="bg-red column float-col">
+            <h2>5</h2>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="bg-yellow footer">
+        <h2>Блок 6</h2>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+/* style.css */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    text-align: center; /* Центрування тексту в блоках */
+}
+
+/* Кольори згідно з вашою схемою */
+.bg-yellow { background-color: #FFD700; } /* Блоки 1, 6 */
+.bg-blue   { background-color: #4169E1; color: white; } /* Блок 2 */
+.bg-red    { background-color: #FF6347; color: white; } /* Блоки 3, 5 */
+.bg-white  { background-color: #FFFFFF; border: 1px solid #ccc; } /* Блок 4 */
+
+/* Загальні параметри блоків */
+div, td {
+    box-sizing: border-box; /* Щоб padding і border не збільшували ширину */
+}
+
+.header, .footer {
+    height: 80px;
+    border: 1px solid #000;
+    padding: 20px;
+    position: relative; /* Для позиціонування білого прямокутника */
+}
+
+/* Білий прямокутник в хедері */
+.logo-box {
+    width: 150px;
+    height: 40px;
+    background: white;
+    border: 1px solid #000;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.column {
+    height: 400px; /* Висота колонок */
+    border: 1px solid #000;
+    padding-top: 20px;
+}

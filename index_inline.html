@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Варіант 06 - Inline-block</title>
+    <link rel="stylesheet" href="style_1.css">
+    <style>
+        .ib-container {
+            width: 100%;
+            font-size: 0; /* Прибираємо відступи між інлайн-блоками */
+        }
+        .ib-col {
+            display: inline-block;
+            width: 25%;
+            vertical-align: top; /* Вирівнювання по верхньому краю */
+            font-size: 16px; /* Повертаємо розмір шрифту для тексту */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-yellow header">
+        <div class="logo-box"></div>
+        <h2>Блок 1</h2>
+    </div>
+
+    <div class="ib-container">
+        <div class="bg-blue column ib-col">
+            <h2>2</h2>
+        </div>
+        <div class="bg-red column ib-col">
+            <h2>3</h2>
+        </div>
+        <div class="bg-white column ib-col">
+            <h2>4</h2>
+        </div>
+        <div class="bg-red column ib-col">
+            <h2>5</h2>
+        </div>
+    </div>
+
+    <div class="bg-yellow footer">
+        <h2>Блок 6</h2>
+    </div>
+
+</body>
+</html>
